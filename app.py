@@ -8,7 +8,7 @@ import threading
 
 UDP_IP = "0.0.0.0"
 UDP_PORT = 65013
-BUFFER_SIZE = 128
+BUFFER_SIZE = 256
 
 
 app = Flask(__name__)
@@ -23,15 +23,16 @@ def udpFunc():
     conta = 0
     while True:
         data = sock.recvfrom(BUFFER_SIZE)
-        if data:  
-            #print(data, conta)         
+        if data:           
+
             row = data[0]
             encoding = 'utf-8'
             stringa = str(row, encoding=encoding)
 
             arr = stringa.split("@")
             
-            array1.append(arr)       
+            array1.append(arr)    
+            print(array1)   
             
             if conta == 49:
                 np.savetxt("provacsv.csv",
